@@ -27,6 +27,7 @@ class fillValuesProfile(BaseEstimator, TransformerMixin):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         data = X.copy()
         target = Y.copy()
+        print(target)
         # Varre cada perfil e preenche os valores faltantes com base na média daquele perfil
         for perfil in list(target['PERFIL'].unique()):
           mean_value = data.loc[target['PERFIL']==perfil][self.columns[0]].mean()
