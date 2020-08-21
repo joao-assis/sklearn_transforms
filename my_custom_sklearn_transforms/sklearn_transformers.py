@@ -23,14 +23,14 @@ class fillValuesProfile(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
     
-    def transform(self, X):
+    def transform(self, X,Y):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         data = X.copy()
+        target = Y.copy()
         # Varre cada perfil e preenche os valores faltantes com base na média daquele perfil
-        for perfil in list(data['PERFIL'].unique()):
-          mean_value = data.loc[data['PERFIL']==perfil][self.columns[0]].mean()
-          data.loc[data['PERFIL']==perfil,self.columns[0]] =  data.loc[data['PERFIL']==perfil,self.columns[0]].fillna(value=mean_value)
-          print(data.loc[data['PERFIL']==perfil,self.columns[0]])
+        for perfil in list(target['PERFIL'].unique()):
+          mean_value = data.loc[target['PERFIL']==perfil][self.columns[0]].mean()
+          data.loc[target['PERFIL']==perfil,self.columns[0]] =  data.loc[target['PERFIL']==perfil,self.columns[0]].fillna(value=mean_value)
         # Retornamos um novo dataframe com os valores preenchidos
         return data
 
